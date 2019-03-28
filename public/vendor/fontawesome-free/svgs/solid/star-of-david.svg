@@ -1,0 +1,12 @@
+"use strict";
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+Object.defineProperty(exports, "__esModule", { value: true });
+const vscode = require("vscode");
+const commandManager_1 = require("./commandManager");
+const commands = require("./commands/index");
+const documentLinkProvider_1 = require("./features/documentLinkProvider");
+const documentSymbolProvider_1 = require("./features/documentSymbolProvider");
+cons

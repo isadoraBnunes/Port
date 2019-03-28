@@ -1,0 +1,24 @@
+eforeEach/afterEach` block to
+     * execute in a ProxyZone zone.
+     * This will run in `testProxyZone`. The `testProxyZone` will be reset by the `ZoneQueueRunner`
+     */
+    function wrapTestInZone(testBody) {
+        // The `done` callback is only passed through if the function expects at least one argument.
+        // Note we have to make a function with correct number of arguments, otherwise jasmine will
+        // think that all functions are sync or async.
+        return (testBody.length == 0) ? function () {
+            return testProxyZone.run(testBody, this);
+        } : function (done) {
+            return testProxyZone.run(testBody, this, [done]);
+        };
+    }
+    var QueueRunner = jasmine.QueueRunner;
+    jasmine.QueueRunner = (function (_super) {
+        __extends(ZoneQueueRunner, _super);
+        function ZoneQueueRunner(attrs) {
+            attrs.onComplete = (function (fn) { return function () {
+                // All functions are done, clear the test zone.
+                testProxyZone = null;
+                ambientZone.scheduleMicroTask('jasmine.onComplete', fn);
+            }; })(attrs.onComplete);
+            _super.call(this, attrs);

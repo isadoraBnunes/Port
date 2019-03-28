@@ -1,0 +1,15 @@
+duleTask(parentZoneDelegate, currentZone, targetZone, task);
+        }
+        else {
+            return parentZoneDelegate.scheduleTask(targetZone, task);
+        }
+    };
+    ProxyZoneSpec.prototype.onInvokeTask = function (parentZoneDelegate, currentZone, targetZone, task, applyThis, applyArgs) {
+        if (this._delegateSpec && this._delegateSpec.onFork) {
+            return this._delegateSpec.onInvokeTask(parentZoneDelegate, currentZone, targetZone, task, applyThis, applyArgs);
+        }
+        else {
+            return parentZoneDelegate.invokeTask(targetZone, task, applyThis, applyArgs);
+        }
+    };
+    ProxyZoneSpec.prototype.onCancelTask = function

@@ -1,0 +1,36 @@
+cii newZone)');
+    WtfZoneSpec.scheduleInstance = {};
+    WtfZoneSpec.cancelInstance = {};
+    WtfZoneSpec.invokeScope = {};
+    WtfZoneSpec.invokeTaskScope = {};
+    function shallowObj(obj, depth) {
+        if (!depth)
+            return null;
+        var out = {};
+        for (var key in obj) {
+            if (obj.hasOwnProperty(key)) {
+                var value = obj[key];
+                switch (typeof value) {
+                    case 'object':
+                        var name_1 = value && value.constructor && value.constructor.name;
+                        value = name_1 == Object.name ? shallowObj(value, depth - 1) : name_1;
+                        break;
+                    case 'function':
+                        value = value.name || undefined;
+                        break;
+                }
+                out[key] = value;
+            }
+        }
+        return out;
+    }
+    function zonePathName(zone) {
+        var name = zone.name;
+        zone = zone.parent;
+        while (zone != null) {
+            name = zone.name + '::' + name;
+            zone = zone.parent;
+        }
+        return name;
+    }
+ 

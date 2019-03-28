@@ -1,0 +1,16 @@
+ firstFile);
+                            fs.readFile(filePath, function (error, payload) {
+                                if (!error) {
+                                    // delete the file first to prevent double sending
+                                    fs.unlink(filePath, function (error) {
+                                        if (!error) {
+                                            _this.send(payload);
+                                        }
+                                        else {
+                                            _this._onErrorHelper(error);
+                                        }
+                                    });
+                                }
+                                else {
+                                    _this._onErrorHelper(error);
+                          

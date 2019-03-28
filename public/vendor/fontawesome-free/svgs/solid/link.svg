@@ -1,0 +1,44 @@
+             stackSetSucceeded = true;
+                }
+            }
+            catch (e) {
+            }
+            var longStack = stackSetSucceeded ?
+                null :
+                renderLongStackTrace(parentTask.data && parentTask.data[creationTrace], error.stack);
+            if (!stackSetSucceeded) {
+                try {
+                    stackSetSucceeded = error.stack = longStack;
+                }
+                catch (e) {
+                }
+            }
+            if (!stackSetSucceeded) {
+                try {
+                    stackSetSucceeded = error.longStack = longStack;
+                }
+                catch (e) {
+                }
+            }
+        }
+        return parentZoneDelegate.handleError(targetZone, error);
+    }
+};
+function captureStackTraces(stackTraces, count) {
+    if (count > 0) {
+        stackTraces.push(getFrames((new LongStackTrace()).error));
+        captureStackTraces(stackTraces, count - 1);
+    }
+}
+function computeIgnoreFrames() {
+    var frames = [];
+    captureStackTraces(frames, 2);
+    var frames1 = frames[0];
+    var frames2 = frames[1];
+    for (var i = 0; i < frames1.length; i++) {
+        var frame1 = frames1[i];
+        var frame2 = frames2[i];
+        if (frame1 === frame2) {
+            IGNORE_FRAMES.push(frame1);
+        }
+        e

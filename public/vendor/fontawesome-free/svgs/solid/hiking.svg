@@ -1,0 +1,38 @@
+// Replace link-like texts with link nodes.
+//
+// Currently restricted by `md.validateLink()` to http/https/ftp
+//
+'use strict';
+
+
+var arrayReplaceAt = require('../common/utils').arrayReplaceAt;
+
+
+function isLinkOpen(str) {
+  return /^<a[>\s]/i.test(str);
+}
+function isLinkClose(str) {
+  return /^<\/a\s*>/i.test(str);
+}
+
+
+module.exports = function linkify(state) {
+  var i, j, l, tokens, token, currentToken, nodes, ln, text, pos, lastPos,
+      level, htmlLinkLevel, url, fullUrl, urlText,
+      blockTokens = state.tokens,
+      links;
+
+  if (!state.md.options.linkify) { return; }
+
+  for (j = 0, l = blockTokens.length; j < l; j++) {
+    if (blockTokens[j].type !== 'inline' ||
+        !state.md.linkify.pretest(blockTokens[j].content)) {
+      continue;
+    }
+
+    tokens = blockTokens[j].children;
+
+    htmlLinkLevel = 0;
+
+    // We scan from the end, to keep position when new tags added.
+    // Use

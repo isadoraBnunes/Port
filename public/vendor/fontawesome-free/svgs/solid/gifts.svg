@@ -1,0 +1,50 @@
+   * ```
+   *
+   * See [source code](https://github.com/markdown-it/markdown-it/blob/master/lib/renderer.js)
+   * for more details and examples.
+   **/
+  this.rules = assign({}, default_rules);
+}
+
+
+/**
+ * Renderer.renderAttrs(token) -> String
+ *
+ * Render token attributes to string.
+ **/
+Renderer.prototype.renderAttrs = function renderAttrs(token) {
+  var i, l, result;
+
+  if (!token.attrs) { return ''; }
+
+  result = '';
+
+  for (i = 0, l = token.attrs.length; i < l; i++) {
+    result += ' ' + escapeHtml(token.attrs[i][0]) + '="' + escapeHtml(token.attrs[i][1]) + '"';
+  }
+
+  return result;
+};
+
+
+/**
+ * Renderer.renderToken(tokens, idx, options) -> String
+ * - tokens (Array): list of tokens
+ * - idx (Numbed): token index to render
+ * - options (Object): params of parser instance
+ *
+ * Default token renderer. Can be overriden by custom function
+ * in [[Renderer#rules]].
+ **/
+Renderer.prototype.renderToken = function renderToken(tokens, idx, options) {
+  var nextToken,
+      result = '',
+      needLf = false,
+      token = tokens[idx];
+
+  // Tight list paragraphs
+  if (token.hidden) {
+    return '';
+  }
+
+  // Insert a newline between hidden para

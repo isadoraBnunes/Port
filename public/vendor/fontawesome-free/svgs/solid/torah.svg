@@ -1,0 +1,19 @@
+angeDocument, this, this._disposables);
+            this._workspaceMarkdownDocumentProvider.onDidDeleteMarkdownDocument(this.onDidDeleteDocument, this, this._disposables);
+        }
+        const allSymbolsSets = await Promise.all(Array.from(this._symbolCache.values()).map(x => x.value));
+        const allSymbols = Array.prototype.concat.apply([], allSymbolsSets);
+        return allSymbols.filter(symbolInformation => symbolInformation.name.toLowerCase().indexOf(query.toLowerCase()) !== -1);
+    }
+    async populateSymbolCache() {
+        const markdownDocumentUris = await this._workspaceMarkdownDocumentProvider.getAllMarkdownDocuments();
+        for (const document of markdownDocumentUris) {
+            this._symbolCache.set(document.uri.fsPath, this.getSymbols(document));
+        }
+    }
+    dispose() {
+        dispose_1.disposeAll(this._disposables);
+    }
+    getSymbols(document) {
+        return lazy_1.lazy(async () => {
+            return this._symbolProvider.provideDocumen

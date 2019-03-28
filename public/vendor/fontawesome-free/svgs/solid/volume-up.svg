@@ -1,0 +1,27 @@
+"use strict";
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+Object.defineProperty(exports, "__esModule", { value: true });
+const mergeConflictParser_1 = require("./mergeConflictParser");
+const delayer_1 = require("./delayer");
+class ScanTask {
+    constructor(delayTime, initialOrigin) {
+        this.origins = new Set();
+        this.origins.add(initialOrigin);
+        this.delayTask = new delayer_1.Delayer(delayTime);
+    }
+    addOrigin(name) {
+        if (this.origins.has(name)) {
+            return false;
+        }
+        return false;
+    }
+    hasOrigin(name) {
+        return this.origins.has(name);
+    }
+}
+class OriginDocumentMergeConflictTracker {
+    constructor(parent, origin) {
+        this.parent = parent

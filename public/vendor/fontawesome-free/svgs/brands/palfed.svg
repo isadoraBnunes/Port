@@ -1,0 +1,36 @@
+var inverseXML = getInverseObj(require("../maps/xml.json")),
+    xmlReplacer = getInverseReplacer(inverseXML);
+
+exports.XML = getInverse(inverseXML, xmlReplacer);
+
+var inverseHTML = getInverseObj(require("../maps/entities.json")),
+    htmlReplacer = getInverseReplacer(inverseHTML);
+
+exports.HTML = getInverse(inverseHTML, htmlReplacer);
+
+function getInverseObj(obj){
+	return Object.keys(obj).sort().reduce(function(inverse, name){
+		inverse[obj[name]] = "&" + name + ";";
+		return inverse;
+	}, {});
+}
+
+function getInverseReplacer(inverse){
+	var single = [],
+	    multiple = [];
+
+	Object.keys(inverse).forEach(function(k){
+		if(k.length === 1){
+			single.push("\\" + k);
+		} else {
+			multiple.push(k);
+		}
+	});
+
+	//TODO add ranges
+	multiple.unshift("[" + single.join("") + "]");
+
+	return new RegExp(multiple.join("|"), "g");
+}
+
+var re_nonASC

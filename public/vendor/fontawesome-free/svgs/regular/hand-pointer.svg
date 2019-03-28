@@ -1,0 +1,33 @@
+ code executing this function.
+ * Use this method if automatic dependency correlation is not propagating
+ * correctly to an asynchronous callback.
+ */
+function wrapWithCorrelationContext(fn) {
+    return CorrelationContextManager.CorrelationContextManager.wrapCallback(fn);
+}
+exports.wrapWithCorrelationContext = wrapWithCorrelationContext;
+/**
+ * The active configuration for global SDK behaviors, such as autocollection.
+ */
+var Configuration = (function () {
+    function Configuration() {
+    }
+    /**
+     * Sets the state of console and logger tracking (enabled by default for third-party loggers only)
+     * @param value if true logger activity will be sent to Application Insights
+     * @param collectConsoleLog if true, logger autocollection will include console.log calls (default false)
+     * @returns {Configuration} this class
+     */
+    Configuration.setAutoCollectConsole = function (value, collectConsoleLog) {
+        if (collectConsoleLog === void 0) { collectConsoleLog = false; }
+        _isConsole = value;
+        _isConsoleLog = collectConsoleLog;
+        if (_isStarted) {
+            _console.enable(value, collectConsoleLog);
+        }
+        return Configuration;
+    };
+    /**
+     * Sets the state of exception tracking (enabled by default)
+     * @param value if true uncaught exceptions will be sent to Application Insights
+     * @returns {Configuration} this

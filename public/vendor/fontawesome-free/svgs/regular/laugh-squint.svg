@@ -1,0 +1,15 @@
+ors.  By pressing kb(editor.action.marker.nextInFiles) you can navigate across them in sequence and see the detailed error message.  As you correct them the squiggles and scrollbar indicators will update.
+
+```js
+// This code has a few syntax errors
+Console.log(add(1, 1.5));
+
+
+function Add(a : Number, b : Number) : Int {
+    return a + b;
+}
+```
+
+
+###  Snippets
+You can greatly accelerate your editing through the use of snippets.  Simply start typing `try` and select `trycatch` from the suggestion list and press kb(insertSnippet) to create a `try`->`catch` block.  Your cursor will be placed on the text `error` for easy editing.  If more than one parameter exists then press

@@ -1,0 +1,32 @@
+e, any options)`);
+      }
+      const retValue = parentZoneDelegate.cancelTask(targetZone, task);
+      instance(zonePathName(targetZone), shallowObj(task.data, 2));
+      return retValue;
+    };
+  }
+
+  function shallowObj(obj: any, depth: number): any {
+    if (!depth) return null;
+    const out = {};
+    for (const key in obj) {
+      if (obj.hasOwnProperty(key)) {
+        let value = obj[key];
+        switch (typeof value) {
+          case 'object':
+            const name = value && value.constructor && (<any>value.constructor).name;
+            value = name == (<any>Object).name ? shallowObj(value, depth - 1) : name;
+            break;
+          case 'function':
+            value = value.name || undefined;
+            break;
+        }
+        out[key] = value;
+      }
+    }
+    return out;
+  }
+
+  function zonePathName(zone: Zone) {
+    let name: string = zone.name;
+    zone =

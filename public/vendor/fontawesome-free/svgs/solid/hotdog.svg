@@ -1,0 +1,40 @@
+e should terminate list on style change. Remember first one to compare.
+  markerCharCode = state.src.charCodeAt(posAfterMarker - 1);
+
+  // For validation mode we can terminate immediately
+  if (silent) { return true; }
+
+  // Start list
+  listTokIdx = state.tokens.length;
+
+  if (isOrdered) {
+    token       = state.push('ordered_list_open', 'ol', 1);
+    if (markerValue !== 1) {
+      token.attrs = [ [ 'start', markerValue ] ];
+    }
+
+  } else {
+    token       = state.push('bullet_list_open', 'ul', 1);
+  }
+
+  token.map    = listLines = [ startLine, 0 ];
+  token.markup = String.fromCharCode(markerCharCode);
+
+  //
+  // Iterate list items
+  //
+
+  nextLine = startLine;
+  prevEmptyEnd = false;
+  terminatorRules = state.md.block.ruler.getRules('list');
+
+  oldParentType = state.parentType;
+  state.parentType = 'list';
+
+  while (nextLine < endLine) {
+    pos = posAfterMarker;
+    max = state.eMarks[nextLine];
+
+    initial = offset = state.sCount[nextLine] + posAfterMarker - (state.bMarks[startLine] + state.tShift[startLine]);
+
+    while (pos

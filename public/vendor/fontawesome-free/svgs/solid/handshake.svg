@@ -1,0 +1,36 @@
+// fences (``` lang, ~~~ lang)
+
+'use strict';
+
+
+module.exports = function fence(state, startLine, endLine, silent) {
+  var marker, len, params, nextLine, mem, token, markup,
+      haveEndMarker = false,
+      pos = state.bMarks[startLine] + state.tShift[startLine],
+      max = state.eMarks[startLine];
+
+  // if it's indented more than 3 spaces, it should be a code block
+  if (state.sCount[startLine] - state.blkIndent >= 4) { return false; }
+
+  if (pos + 3 > max) { return false; }
+
+  marker = state.src.charCodeAt(pos);
+
+  if (marker !== 0x7E/* ~ */ && marker !== 0x60 /* ` */) {
+    return false;
+  }
+
+  // scan marker length
+  mem = pos;
+  pos = state.skipChars(pos, marker);
+
+  len = pos - mem;
+
+  if (len < 3) { return false; }
+
+  markup = state.src.slice(mem, pos);
+  params = state.src.slice(pos, max);
+
+  if (params.indexOf(String.fromCharCode(marker)) >= 0) { return false; }
+
+  // Since star

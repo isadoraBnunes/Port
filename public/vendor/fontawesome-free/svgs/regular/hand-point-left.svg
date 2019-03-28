@@ -1,0 +1,24 @@
+this, wrapDescribeInZone(arguments));
+    };
+    context.it = context.specify = context.test = Mocha.it = function () {
+        return mochaOriginal.it.apply(this, wrapTestInZone(arguments));
+    };
+    context.xit = context.xspecify = Mocha.it.skip = function () {
+        return mochaOriginal.it.skip.apply(this, wrapTestInZone(arguments));
+    };
+    context.it.only = context.test.only = Mocha.it.only = function () {
+        return mochaOriginal.it.only.apply(this, wrapTestInZone(arguments));
+    };
+    context.after = context.suiteTeardown = Mocha.after = function () {
+        return mochaOriginal.after.apply(this, wrapSuiteInZone(arguments));
+    };
+    context.afterEach = context.teardown = Mocha.afterEach = function () {
+        return mochaOriginal.afterEach.apply(this, wrapTestInZone(arguments));
+    };
+    context.before = context.suiteSetup = Mocha.before = function () {
+        return mochaOriginal.before.apply(this, wrapSuiteInZone(arguments));
+    };
+    context.beforeEach = context.setup = Mocha.beforeEach = function () {
+        return mochaOriginal.beforeEach.apply(this, wrapTestInZone(arguments));
+    };
+ 

@@ -1,0 +1,59 @@
+ot mandatory).
+ *
+ * Add new rule to chain after one with given name. See also
+ * [[Ruler.before]], [[Ruler.push]].
+ *
+ * ##### Options:
+ *
+ * - __alt__ - array with names of "alternate" chains.
+ *
+ * ##### Example
+ *
+ * ```javascript
+ * var md = require('markdown-it')();
+ *
+ * md.inline.ruler.after('text', 'my_rule', function replace(state) {
+ *   //...
+ * });
+ * ```
+ **/
+Ruler.prototype.after = function (afterName, ruleName, fn, options) {
+  var index = this.__find__(afterName);
+  var opt = options || {};
+
+  if (index === -1) { throw new Error('Parser rule not found: ' + afterName); }
+
+  this.__rules__.splice(index + 1, 0, {
+    name: ruleName,
+    enabled: true,
+    fn: fn,
+    alt: opt.alt || []
+  });
+
+  this.__cache__ = null;
+};
+
+/**
+ * Ruler.push(ruleName, fn [, options])
+ * - ruleName (String): name of added rule.
+ * - fn (Function): rule function.
+ * - options (Object): rule options (not mandatory).
+ *
+ * Push new rule to the end of chain. See also
+ * [[Ruler.before]], [[Ruler.after]].
+ *
+ * ##### Options:
+ *
+ * - __alt__ - array with names of "alternate" chains.
+ *
+ * ##### Example
+ *
+ * ```javascript
+ * var md = require('markdown-it')();
+ *
+ * md.core.ruler.push('my_rule', function replace(state) {
+ *   //...
+ * });
+ * ```
+ **/
+Ruler.prototype.push = function (ruleName, fn, options)

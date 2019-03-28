@@ -1,0 +1,23 @@
+import Domain = require('./Domain');
+/**
+ * An instance of Remote Dependency represents an interaction of the monitored component with a remote component/service like SQL or an HTTP endpoint.
+ */
+declare class RemoteDependencyData extends Domain {
+    /**
+     * Schema version
+     */
+    ver: number;
+    /**
+     * Name of the command initiated with this dependency call. Low cardinality value. Examples are stored procedure name and URL path template.
+     */
+    name: string;
+    /**
+     * Identifier of a dependency call instance. Used for correlation with the request telemetry item corresponding to this dependency call.
+     */
+    id: string;
+    /**
+     * Result code of a dependency call. Examples are SQL error code and HTTP status code.
+     */
+    resultCode: string;
+    /**
+     * Request duration in format: DD.HH:MM:SS.MMMMMM. Must be less t

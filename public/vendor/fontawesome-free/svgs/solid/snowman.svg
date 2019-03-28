@@ -1,0 +1,35 @@
+endingTimers, id);
+      };
+    }
+
+    private _requeuePeriodicTimer(fn: Function, interval: number, args: any[], id: number):
+        Function {
+      return () => {
+        // Requeue the timer callback if it's not been canceled.
+        if (this.pendingPeriodicTimers.indexOf(id) !== -1) {
+          this._scheduler.scheduleFunction(fn, interval, args, id);
+        }
+      };
+    }
+
+    private _dequeuePeriodicTimer(id: number): Function {
+      return () => {
+        FakeAsyncTestZoneSpec._removeTimer(this.pendingPeriodicTimers, id);
+      };
+    }
+
+    private _setTimeout(fn: Function, delay: number, args: any[]): number {
+      let removeTimerFn = this._dequeueTimer(this._scheduler.nextId);
+      // Queue the callback and dequeue the timer on success and error.
+      let cb = this._fnAndFlush(fn, {onSuccess: removeTimerFn, onError: removeTimerFn});
+      let id = this._scheduler.scheduleFunction(cb, delay, args);
+      this.pendingTimers.push(id);
+      return id;
+    }
+
+    private _clearTimeout(id: number): void {
+      FakeAsyncTestZoneSpec._removeTimer(this.pendingTimers, id);
+      this._scheduler.removeScheduledFunctionWithId(id);
+    }
+
+    private _setInterval(fn: Function

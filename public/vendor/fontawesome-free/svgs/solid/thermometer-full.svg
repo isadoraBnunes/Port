@@ -1,0 +1,10 @@
+iew.options = MarkdownPreview.getWebviewOptions(resource, contributions);
+        if (!isNaN(line)) {
+            preview.line = line;
+        }
+        await preview.doUpdate();
+        return preview;
+    }
+    static create(resource, previewColumn, locked, contentProvider, previewConfigurations, logger, topmostLineMonitor, contributions) {
+        const webview = vscode.window.createWebviewPanel(MarkdownPreview.viewType, MarkdownPreview.getPreviewTitle(resource, locked), previewColumn, Object.assign({ enableFindWidget: true }, MarkdownPreview.getWebviewOptions(resource, contributions)));
+        return new MarkdownPreview(webview, resource, locked, contentProv

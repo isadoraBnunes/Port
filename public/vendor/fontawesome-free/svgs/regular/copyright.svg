@@ -1,0 +1,17 @@
+rationParentId = function (tags) {
+        return tags[HttpRequestParser.keys.operationParentId] || this.parentId || this.getOperationId(tags);
+    };
+    HttpRequestParser.prototype.getOperationName = function (tags) {
+        return tags[HttpRequestParser.keys.operationName] || this.method + " " + url.parse(this.url).pathname;
+    };
+    HttpRequestParser.prototype.getRequestId = function () {
+        return this.requestId;
+    };
+    HttpRequestParser.prototype.getCorrelationContextHeader = function () {
+        return this.correlationContextHeader;
+    };
+    HttpRequestParser.prototype._getAbsoluteUrl = function (request) {
+        if (!request.headers) {
+            return request.url;
+        }
+        var encrypted = request.connection ? request.connection.encrypted

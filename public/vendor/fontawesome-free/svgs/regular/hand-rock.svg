@@ -1,0 +1,29 @@
+ts.defaultClient.channel.setUseDiskRetryCaching(value, resendInterval);
+        }
+        return Configuration;
+    };
+    /**
+     * Enables debug and warning logging for AppInsights itself.
+     * @param enableDebugLogging if true, enables debug logging
+     * @param enableWarningLogging if true, enables warning logging
+     * @returns {Configuration} this class
+     */
+    Configuration.setInternalLogging = function (enableDebugLogging, enableWarningLogging) {
+        if (enableDebugLogging === void 0) { enableDebugLogging = false; }
+        if (enableWarningLogging === void 0) { enableWarningLogging = true; }
+        Logging.enableDebug = enableDebugLogging;
+        Logging.disableWarnings = !enableWarningLogging;
+        return Configuration;
+    };
+    // Convenience shortcut to ApplicationInsights.start
+    Configuration.start = start;
+    return Configuration;
+}());
+exports.Configuration = Configuration;
+/**
+ * Disposes the default client and all the auto collectors so they can be reinitialized with different configuration
+*/
+function dispose() {
+    exports.defaultClient = null;
+    _isStarted = false;
+  

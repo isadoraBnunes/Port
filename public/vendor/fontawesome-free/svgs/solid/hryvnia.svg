@@ -1,0 +1,42 @@
+// Simple typographyc replacements
+//
+// (c) (C) → ©
+// (tm) (TM) → ™
+// (r) (R) → ®
+// +- → ±
+// (p) (P) -> §
+// ... → … (also ?.... → ?.., !.... → !..)
+// ???????? → ???, !!!!! → !!!, `,,` → `,`
+// -- → &ndash;, --- → &mdash;
+//
+'use strict';
+
+// TODO:
+// - fractionals 1/2, 1/4, 3/4 -> ½, ¼, ¾
+// - miltiplication 2 x 4 -> 2 × 4
+
+var RARE_RE = /\+-|\.\.|\?\?\?\?|!!!!|,,|--/;
+
+// Workaround for phantomjs - need regex without /g flag,
+// or root check will fail every second time
+var SCOPED_ABBR_TEST_RE = /\((c|tm|r|p)\)/i;
+
+var SCOPED_ABBR_RE = /\((c|tm|r|p)\)/ig;
+var SCOPED_ABBR = {
+  c: '©',
+  r: '®',
+  p: '§',
+  tm: '™'
+};
+
+function replaceFn(match, name) {
+  return SCOPED_ABBR[name.toLowerCase()];
+}
+
+function replace_scoped(inlineTokens) {
+  var i, token, inside_autolink = 0;
+
+  for (i = inlineTokens.length - 1; i >= 0; i--) {
+    token = inlineTokens[i];
+
+    if (token.type === 'text' && !inside_autol

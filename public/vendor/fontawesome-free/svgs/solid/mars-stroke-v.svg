@@ -1,0 +1,12 @@
+
+                    if (re.number.test(match[8]) && (!is_positive || match[3])) {
+                        sign = is_positive ? "+" : "-"
+                        arg = arg.toString().replace(re.sign, "")
+                    }
+                    else {
+                        sign = ""
+                    }
+                    pad_character = match[4] ? match[4] === "0" ? "0" : match[4].charAt(1) : " "
+                    pad_length = match[6] - (sign + arg).length
+                    pad = match[6] ? (pad_length > 0 ? str_repeat(pad_character, pad_length) : "") : ""
+            

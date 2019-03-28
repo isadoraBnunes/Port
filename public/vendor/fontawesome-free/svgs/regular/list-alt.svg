@@ -1,0 +1,18 @@
+              https.request(options, requestCallback) :
+                http.request(options, requestCallback);
+            req.on("error", function (error) {
+                // todo: handle error codes better (group to recoverable/non-recoverable and persist)
+                Logging.warn(Sender.TAG, error);
+                _this._onErrorHelper(error);
+                if (typeof callback === "function") {
+                    var errorMessage = "error sending telemetry";
+                    if (error && (typeof error.toString === "function")) {
+                        errorMessage = error.toString();
+                    }
+                    callback(errorMessage);
+                }
+                if (_this._enableDiskRetryMode) {
+                    _this._storeToDisk(payload);
+                }
+            });
+            req.write(dataToSend);

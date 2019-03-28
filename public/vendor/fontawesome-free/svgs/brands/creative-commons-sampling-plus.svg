@@ -1,0 +1,21 @@
+rent.name));
+
+var result = z2.run(() => z1BoundFunc());
+```
+
+Because the function was bound in `zone 1`, `result` will be `zone 1`.
+
+### registerMonkeyPatch
+
+`channel.registerMonkeyPatch(packageName: string, patcher: {versionSpecifier: string, patch: (any, path: string) => any})`;
+
+In order to inject publishing and context preservation behavior into third party libraries, we support monkey patching libraries as they are `require`'d.
+
+Calling this function will register a candidate monkey patcher to be applied when a future `require(packageName)` is called. If the package's version is a semver match for the `versionSpecifier` range, then the original object for that package is passed to the `patch` function, along with the path to the module, and the `patch` function should return a patched version which will end up as the result of the `require`.
+
+For a simple example where we patch a `doSomethingAsync` method of the `foo` module to preserve the current context when invoking a callback:
+
+```js
+function patchFunction(originalPackage, packagePath) {
+    var originalFooAsync = foo.doSomethingAsync;
+    foo.doSomethingAsync = function ()

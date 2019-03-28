@@ -1,0 +1,17 @@
+ JSON content represents. On invalid input, the parser tries to be as fault tolerant as possible, but still return a result.
+ * Therefore always check the errors list to find out if the input was valid.
+ */
+export declare function parse(text: string, errors?: ParseError[], options?: ParseOptions): any;
+/**
+ * Parses the given text and returns a tree representation the JSON content. On invalid input, the parser tries to be as fault tolerant as possible, but still return a result.
+ */
+export declare function parseTree(text: string, errors?: ParseError[], options?: ParseOptions): Node;
+export declare function findNodeAtLocation(root: Node, path: JSONPath): Node;
+export declare function getNodeValue(node: Node): any;
+/**
+ * Parses the given text and invokes the visitor functions for each object, array and literal reached.
+ */
+export declare function visit(text: string, visitor: JSONVisitor, options?: ParseOptions): any;
+export interface JSONVisitor {
+    /**
+     * Invoked when an open bra

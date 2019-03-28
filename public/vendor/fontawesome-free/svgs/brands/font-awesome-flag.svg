@@ -1,0 +1,20 @@
+llback) {
+                        callback = patchCallback(callback);
+                    }
+                    else {
+                        values = patchCallback(values);
+                    }
+                }
+            }
+            else {
+                if (typeof config.name === "string") {
+                    data.query.plan = config.name;
+                }
+                else if (config.values instanceof Array) {
+                    data.query.preparable = {
+                        text: config.text,
+                        args: config.values,
+                    };
+                }
+                else {
+         

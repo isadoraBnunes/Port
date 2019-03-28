@@ -1,0 +1,27 @@
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+
+import {makeZoneAwareAddListener, makeZoneAwareListeners, makeZoneAwareRemoveAllListeners, makeZoneAwareRemoveListener, patchMethod} from '../common/utils';
+
+const callAndReturnFirstParam = (fn: (self: any, args: any[]) => any) => {
+  return (self: any, args: any[]) => {
+    fn(self, args);
+    return self;
+  };
+};
+
+// For EventEmitter
+const EE_ADD_LISTENER = 'addListener';
+const EE_PREPEND_LISTENER = 'prependListener';
+const EE_REMOVE_LISTENER = 'removeListener';
+const EE_REMOVE_ALL_LISTENER = 'removeAllListeners';
+const EE_LISTENERS = 'listeners';
+const EE_ON = 'on';
+
+const zoneAwareAddListener = callAndReturnFirstParam(
+    mak

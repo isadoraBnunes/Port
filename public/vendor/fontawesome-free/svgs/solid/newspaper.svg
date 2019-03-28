@@ -1,0 +1,24 @@
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+
+import {zoneSymbol} from '../common/utils';
+/*
+ * This is necessary for Chrome and Chrome mobile, to enable
+ * things like redefining `createdCallback` on an element.
+ */
+
+const _defineProperty = Object[zoneSymbol('defineProperty')] = Object.defineProperty;
+const _getOwnPropertyDescriptor = Object[zoneSymbol('getOwnPropertyDescriptor')] =
+    Object.getOwnPropertyDescriptor;
+const _create = Object.create;
+const unconfigurablesKey = zoneSymbol('unconfigurables');
+
+export function propertyPatch() {
+  Object.defineProperty = function(obj, prop, desc) {
+    if (isUnconfigurable(obj, prop)) {
+      throw new TypeError('Cannot assign to read 

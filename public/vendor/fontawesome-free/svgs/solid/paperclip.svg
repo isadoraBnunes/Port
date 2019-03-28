@@ -1,0 +1,17 @@
+telemetry, Contracts.TelemetryType.Dependency);
+    };
+    /**
+     * Immediately send all queued telemetry.
+     * @param options Flush options, including indicator whether app is crashing and callback
+     */
+    TelemetryClient.prototype.flush = function (options) {
+        this.channel.triggerSend(options ? !!options.isAppCrashing : false, options ? options.callback : undefined);
+    };
+    /**
+     * Generic track method for all telemetry types
+     * @param data the telemetry to send
+     * @param telemetryType specify the type of telemetry you are tracking from the list of Contracts.DataTypes
+     */
+    TelemetryClient.prototype.track = function (telemetry, telemetryType) {
+        if (telemetry && Contracts.telemetryTypeToBaseType(telemetryType)) {
+            var envelope = EnvelopeFactory.createEnvelope(telemetry, telemetryType, this.commonPro

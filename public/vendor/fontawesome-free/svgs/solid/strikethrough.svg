@@ -1,0 +1,22 @@
+   return token;
+        });
+    }
+    addLineNumberRenderer(md, ruleName) {
+        const original = md.renderer.rules[ruleName];
+        md.renderer.rules[ruleName] = (tokens, idx, options, env, self) => {
+            const token = tokens[idx];
+            if (token.map && token.map.length) {
+                token.attrSet('data-line', this.firstLine + token.map[0]);
+                token.attrJoin('class', 'code-line');
+            }
+            if (original) {
+                return original(tokens, idx, options, env, self);
+            }
+            else {
+                return self.renderToken(tokens, idx, options, env, self);
+            }
+        };
+    }
+    addFencedRenderer(md) {
+        const original = md.renderer.rules['fenced'];
+        md.renderer.rules['fenced'] = (tokens, id

@@ -1,0 +1,40 @@
+ return (testBody.length == 0) ? function() {
+      return testProxyZone.run(testBody, this);
+    } : function(done) {
+      return testProxyZone.run(testBody, this, [done]);
+    };
+  }
+  interface QueueRunner {
+    execute(): void;
+  }
+  interface QueueRunnerAttrs {
+    queueableFns: {fn: Function}[];
+    onComplete: () => void;
+    clearStack: (fn) => void;
+    onException: (error) => void;
+    catchException: () => boolean;
+    userContext: any;
+    timeout: {setTimeout: Function, clearTimeout: Function};
+    fail: () => void;
+  }
+
+  const QueueRunner = (jasmine as any).QueueRunner as {new (attrs: QueueRunnerAttrs): QueueRunner};
+  (jasmine as any).QueueRunner = (function(_super) {
+    __extends(ZoneQueueRunner, _super);
+    function ZoneQueueRunner(attrs) {
+      attrs.onComplete = ((fn) => () => {
+        // All functions are done, clear the test zone.
+        testProxyZone = null;
+        ambientZone.scheduleMicroTask('jasmine.onComplete', fn);
+      })(attrs.onComplete);
+      _super.call(this, attrs);
+    }
+    ZoneQueueRunner.prototype.execute = function() {
+      if (Zone.current !== ambientZone) throw new Error('Unexpected Zone: ' + Zone.current.name);
+      testProxyZone = ambientZone.fork(new ProxyZoneSpec());
+      if (!Zone.currentTask) {
+        // if we are not running in a task then if someone would register a
+        // element.addEventListener and then calling element.click() the
+        // addEventListener callback would think that it is the top most task and would
+        // drain the microtask queue on element.click() which would be incorrect.
+        // For this

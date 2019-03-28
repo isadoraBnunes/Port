@@ -1,0 +1,25 @@
+= function (millis) {
+            if (millis === void 0) { millis = 0; }
+            FakeAsyncTestZoneSpec.assertInZone();
+            this.flushMicrotasks();
+            this._scheduler.tick(millis);
+            if (this._lastError !== null) {
+                this._resetLastErrorAndThrow();
+            }
+        };
+        FakeAsyncTestZoneSpec.prototype.flushMicrotasks = function () {
+            var _this = this;
+            FakeAsyncTestZoneSpec.assertInZone();
+            var flushErrors = function () {
+                if (_this._lastError !== null || _this._uncaughtPromiseErrors.length) {
+                    // If there is an error stop processing the microtask queue and rethrow the error.
+                    _this._resetLastErrorAndThrow();
+                }
+            };
+            while (this._microtasks.length > 0) {
+                var microtask = this._microtasks.shift();
+                microtask();
+            }
+            flushErrors();
+        };
+        FakeAsyncTestZon

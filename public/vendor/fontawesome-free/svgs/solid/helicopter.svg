@@ -1,0 +1,19 @@
+// Paragraph
+
+'use strict';
+
+
+module.exports = function paragraph(state, startLine/*, endLine*/) {
+  var content, terminate, i, l, token, oldParentType,
+      nextLine = startLine + 1,
+      terminatorRules = state.md.block.ruler.getRules('paragraph'),
+      endLine = state.lineMax;
+
+  oldParentType = state.parentType;
+  state.parentType = 'paragraph';
+
+  // jump line-by-line until empty one or EOF
+  for (; nextLine < endLine && !state.isEmpty(nextLine); nextLine++) {
+    // this would be a code block normally, but after paragraph
+    // it's considered a lazy continuation regardless of what's there
+    if (state.sCount[nextLine] - state.blkIndent > 3

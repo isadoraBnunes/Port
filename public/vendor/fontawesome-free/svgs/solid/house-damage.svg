@@ -1,0 +1,28 @@
+ trailing spaces until the rest of the line
+  while (pos < max) {
+    ch = str.charCodeAt(pos);
+    if (!isSpace(ch)) { break; }
+    pos++;
+  }
+
+  if (pos < max && str.charCodeAt(pos) !== 0x0A) {
+    if (title) {
+      // garbage at the end of the line after title,
+      // but it could still be a valid reference if we roll back
+      title = '';
+      pos = destEndPos;
+      lines = destEndLineNo;
+      while (pos < max) {
+        ch = str.charCodeAt(pos);
+        if (!isSpace(ch)) { break; }
+        pos++;
+      }
+    }
+  }
+
+  if (pos < max && str.charCodeAt(pos) !== 0x0A) {
+    // garbage at the end of the line
+    return false;
+  }
+
+  label = normaliz

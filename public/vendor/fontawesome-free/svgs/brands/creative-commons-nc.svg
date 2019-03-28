@@ -1,0 +1,17 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var Contracts = require("../Declarations/Contracts");
+/**
+ *  A telemetry processor that handles sampling.
+ */
+function samplingTelemetryProcessor(envelope, contextObjects) {
+    var samplingPercentage = envelope.sampleRate; // Set for us in Client.getEnvelope
+    var isSampledIn = false;
+    if (samplingPercentage === null || samplingPercentage === undefined || samplingPercentage >= 100) {
+        return true;
+    }
+    else if (envelope.data && Contracts.TelemetryType.Metric === Contracts.baseTypeToTelemetryType(envelope.data.baseType)) {
+        // Exclude MetricData telemetry from sampling
+        return true;
+    }
+    else if (contextObjects.correlati
