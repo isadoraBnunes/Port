@@ -6850,164 +6850,114 @@
     _proto.hide = function hide(withoutTimeout) {
       var _this2 = this;
 
-      if (!this._element.classList.contains(ClassName$a.SHOW)) {
-        return;
+      if (!this._element.cla      "revision":"20171003",
+        "url":"http://www.lazada.com"
+      },
+      {
+        "favicon_url":"https://sd-images.operacdn.com/api/v1/images/8304e39a49cdc873ea08dbe10f82f6412634b2ea.png",
+        "name":"Agoda.com",
+        "partner_id":"agoda_com_sea_bb",
+        "ping_url":"https://speeddials.opera.com/api/v2/ping/agoda_com_sea_bb",
+        "position":5,
+        "real_url":"https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1752846",
+        "revision":"20171003",
+        "url":"http://www.agoda.com"
       }
-
-      $(this._element).trigger(Event$a.HIDE);
-
-      if (withoutTimeout) {
-        this._close();
-      } else {
-        this._timeout = setTimeout(function () {
-          _this2._close();
-        }, this._config.delay);
+    ],
+    "speeddials":[
+      {
+        "name":"Booking.com",
+        "partner_id":"booking_com_sea",
+        "ping_url":"https://speeddials.opera.com/api/v2/ping/booking_com_sea",
+        "position":1,
+        "real_url":"http://www.booking.com/index.html?aid=352799&label=operasoft-sdO15-352799&utm_source=Opera&utm_medium=web&utm_campaign=sdO15",
+        "revision":"20180704",
+        "thumbnail_url":"https://sd-images.operacdn.com/api/v1/images/dfb8e26cece0bc9b48746878a1da78dee32fc104.png",
+        "url":"http://www.booking.com"
+      },
+      {
+        "name":"Facebook",
+        "partner_id":"facebook",
+        "ping_url":"https://speeddials.opera.com/api/v2/ping/facebook",
+        "position":2,
+        "real_url":"http://www.facebook.com",
+        "revision":"20171003",
+        "thumbnail_url":"https://sd-images.operacdn.com/api/v1/images/7f7f24d59ae6c9f584a9d494b23027933fda169a.png",
+        "url":"http://www.facebook.com"
+      },
+      {
+        "name":"YouTube",
+        "partner_id":"youtube",
+        "ping_url":"https://speeddials.opera.com/api/v2/ping/youtube",
+        "position":3,
+        "real_url":"http://www.youtube.com",
+        "revision":"20171003",
+        "thumbnail_url":"https://sd-images.operacdn.com/api/v1/images/b2212365035a0d3c41052fd63eb892321b8f363a.png",
+        "url":"http://www.youtube.com"
+      },
+      {
+        "name":"Amazon.com",
+        "partner_id":"amazon_sea",
+        "ping_url":"https://speeddials.opera.com/api/v2/ping/amazon_sea",
+        "position":4,
+        "real_url":"http://www.amazon.com/?tag=operadesktop14-sd-sea-20",
+        "revision":"20181109",
+        "thumbnail_url":"https://sd-images.operacdn.com/api/v1/images/9c71425368eb92a8da3223db67553d0c865b83c4.png",
+        "url":"http://www.amazon.com"
+      },
+      {
+        "name":"AliExpress",
+        "partner_id":"aliexpress_com_sea",
+        "ping_url":"https://speeddials.opera.com/api/v2/ping/aliexpress_com_sea",
+        "position":5,
+        "real_url":"https://redir.opera.com/speeddials/partner/aliexpress_com_sea",
+        "revision":"20171003",
+        "thumbnail_url":"https://sd-images.operacdn.com/api/v1/images/baf46901cd94c248197d5511d704897014775bce.png",
+        "url":"http://aliexpress.com"
+      },
+      {
+        "name":"Lazada",
+        "partner_id":"lazada",
+        "ping_url":"https://speeddials.opera.com/api/v2/ping/lazada",
+        "position":6,
+        "real_url":"http://ho.lazada.com.ph/SHC2K0",
+        "revision":"20171003",
+        "thumbnail_url":"https://sd-images.operacdn.com/api/v1/images/62d33c515d7efe7e6b6e523936d46cd2a79d7425.png",
+        "url":"http://www.lazada.com"
+      },
+      {
+        "name":"Agoda.com",
+        "partner_id":"agoda_com_sea",
+        "ping_url":"https://speeddials.opera.com/api/v2/ping/agoda_com_sea",
+        "position":7,
+        "real_url":"http://www.agoda.com/?cid=1753842",
+        "revision":"20171003",
+        "thumbnail_url":"https://sd-images.operacdn.com/api/v1/images/28320372d29a2aa845b1ef548d3db32e53e2581b.png",
+        "url":"http://www.agoda.com"
       }
-    };
-
-    _proto.dispose = function dispose() {
-      clearTimeout(this._timeout);
-      this._timeout = null;
-
-      if (this._element.classList.contains(ClassName$a.SHOW)) {
-        this._element.classList.remove(ClassName$a.SHOW);
-      }
-
-      $(this._element).off(Event$a.CLICK_DISMISS);
-      $.removeData(this._element, DATA_KEY$a);
-      this._element = null;
-      this._config = null;
-    } // Private
-    ;
-
-    _proto._getConfig = function _getConfig(config) {
-      config = _objectSpread({}, Default$7, $(this._element).data(), typeof config === 'object' && config ? config : {});
-      Util.typeCheckConfig(NAME$a, config, this.constructor.DefaultType);
-      return config;
-    };
-
-    _proto._setListeners = function _setListeners() {
-      var _this3 = this;
-
-      $(this._element).on(Event$a.CLICK_DISMISS, Selector$a.DATA_DISMISS, function () {
-        return _this3.hide(true);
-      });
-    };
-
-    _proto._close = function _close() {
-      var _this4 = this;
-
-      var complete = function complete() {
-        _this4._element.classList.add(ClassName$a.HIDE);
-
-        $(_this4._element).trigger(Event$a.HIDDEN);
-      };
-
-      this._element.classList.remove(ClassName$a.SHOW);
-
-      if (this._config.animation) {
-        var transitionDuration = Util.getTransitionDurationFromElement(this._element);
-        $(this._element).one(Util.TRANSITION_END, complete).emulateTransitionEnd(transitionDuration);
-      } else {
-        complete();
-      }
-    } // Static
-    ;
-
-    Toast._jQueryInterface = function _jQueryInterface(config) {
-      return this.each(function () {
-        var $element = $(this);
-        var data = $element.data(DATA_KEY$a);
-
-        var _config = typeof config === 'object' && config;
-
-        if (!data) {
-          data = new Toast(this, _config);
-          $element.data(DATA_KEY$a, data);
-        }
-
-        if (typeof config === 'string') {
-          if (typeof data[config] === 'undefined') {
-            throw new TypeError("No method named \"" + config + "\"");
-          }
-
-          data[config](this);
-        }
-      });
-    };
-
-    _createClass(Toast, null, [{
-      key: "VERSION",
-      get: function get() {
-        return VERSION$a;
-      }
-    }, {
-      key: "DefaultType",
-      get: function get() {
-        return DefaultType$7;
-      }
-    }, {
-      key: "Default",
-      get: function get() {
-        return Default$7;
-      }
-    }]);
-
-    return Toast;
-  }();
-  /**
-   * ------------------------------------------------------------------------
-   * jQuery
-   * ------------------------------------------------------------------------
-   */
-
-
-  $.fn[NAME$a] = Toast._jQueryInterface;
-  $.fn[NAME$a].Constructor = Toast;
-
-  $.fn[NAME$a].noConflict = function () {
-    $.fn[NAME$a] = JQUERY_NO_CONFLICT$a;
-    return Toast._jQueryInterface;
-  };
-
-  /**
-   * --------------------------------------------------------------------------
-   * Bootstrap (v4.3.1): index.js
-   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
-   * --------------------------------------------------------------------------
-   */
-
-  (function () {
-    if (typeof $ === 'undefined') {
-      throw new TypeError('Bootstrap\'s JavaScript requires jQuery. jQuery must be included before Bootstrap\'s JavaScript.');
-    }
-
-    var version = $.fn.jquery.split(' ')[0].split('.');
-    var minMajor = 1;
-    var ltMajor = 2;
-    var minMinor = 9;
-    var minPatch = 1;
-    var maxMajor = 4;
-
-    if (version[0] < ltMajor && version[1] < minMinor || version[0] === minMajor && version[1] === minMinor && version[2] < minPatch || version[0] >= maxMajor) {
-      throw new Error('Bootstrap\'s JavaScript requires at least jQuery v1.9.1 but less than v4.0.0');
-    }
-  })();
-
-  exports.Util = Util;
-  exports.Alert = Alert;
-  exports.Button = Button;
-  exports.Carousel = Carousel;
-  exports.Collapse = Collapse;
-  exports.Dropdown = Dropdown;
-  exports.Modal = Modal;
-  exports.Popover = Popover;
-  exports.Scrollspy = ScrollSpy;
-  exports.Tab = Tab;
-  exports.Toast = Toast;
-  exports.Tooltip = Tooltip;
-
-  Object.defineProperty(exports, '__esModule', { value: true });
-
-}));
-//# sourceMappingURL=bootstrap.bundle.js.map
+    ]
+  },
+  "pl":{
+    "bookmarkbar":[
+      {
+        "favicon_url":"https://sd-images.operacdn.com/api/v1/images/609fa7dfdac6e13e43d220628faf73eb0bc67ff2.png",
+        "name":"AliExpress",
+        "partner_id":"aliexpress_pl_bb",
+        "ping_url":"https://speeddials.opera.com/api/v2/ping/aliexpress_pl_bb",
+        "position":1,
+        "real_url":"https://redir.opera.com/speeddials/partner/aliexpress_pl_bb",
+        "revision":"20171003",
+        "url":"http://aliexpress.com"
+      },
+      {
+        "favicon_url":"https://sd-images.operacdn.com/api/v1/images/a07ea74aa0b3aae5b7dc37789a2e834b1e883060.png",
+        "name":"Booking.com",
+        "partner_id":"booking_com_pl_bb",
+        "ping_url":"https://speeddials.opera.com/api/v2/ping/booking_com_pl_bb",
+        "position":2,
+        "real_url":"https://www.booking.com/?aid=1547266",
+        "revision":"20180329",
+        "url":"http://www.booking.com"
+      },
+      {
+        "favicon_url":"https://sd-images.operacdn.com/api/v1/images/a88c85bc1f2bc1f9e4ba14

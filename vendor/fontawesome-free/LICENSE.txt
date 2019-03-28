@@ -1,34 +1,5 @@
-Font Awesome Free License
--------------------------
+u.
 
-Font Awesome Free is free, open source, and GPL friendly. You can use it for
-commercial projects, open source projects, or really almost whatever you want.
-Full Font Awesome Free license: https://fontawesome.com/license/free.
+Beberapa fitur akan tidak tersedia. Silahkan tentukan direktori profil yang lain atau gunakan Opera versi terbaru.File preferensi Anda rusak atau tidak sah.
 
-# Icons: CC BY 4.0 License (https://creativecommons.org/licenses/by/4.0/)
-In the Font Awesome Free download, the CC BY 4.0 license applies to all icons
-packaged as SVG and JS file types.
-
-# Fonts: SIL OFL 1.1 License (https://scripts.sil.org/OFL)
-In the Font Awesome Free download, the SIL OFL license applies to all icons
-packaged as web and desktop font files.
-
-# Code: MIT License (https://opensource.org/licenses/MIT)
-In the Font Awesome Free download, the MIT license applies to all non-font and
-non-icon files.
-
-# Attribution
-Attribution is required by MIT, SIL OFL, and CC BY licenses. Downloaded Font
-Awesome Free files already contain embedded comments with sufficient
-attribution, so you shouldn't need to do anything additional when using these
-files normally.
-
-We've kept attribution comments terse, so we ask that you do not actively work
-to remove them from files, especially code. They're a great way for folks to
-learn about Font Awesome.
-
-# Brand Icons
-All brand icons are trademarks of their respective owners. The use of these
-trademarks does not indicate endorsement of the trademark holder by Font
-Awesome, nor vice versa. **Please do not use brand logos for any purpose except
-to represent the company, product, or service to which they refer.**
+Opera gagal mengembalikan pengaturan Anda.Opera tidak memasukkan penampil PDF yang dibutuhkan untuk pratayang cetakan agar berfungsi.Tab OperaApakah Anda ingin menggunakan Google untuk semua pencarian di Opera?Tampilkan warna sistem di bilah atasDirekomendasikan:VPN terhubung dengan situs web melalui berbagai server di seluruh dunia, sehingga dapat memengaruhi kecepatan koneksi AndaMengaktifkan VPN akan mematikan Opera Turbo.VPN sedang tidak bisa digunakan. Opera sedang mengatasi masalah ini.Peringatan VPNAnda meminta untuk tersambung ke $1 tetapi Opera tidak bisa tersambung ke FTP melalui VPN. Jika Anda melanjutkan, koneksi FTP akan dilakukan tanpa VPN.Opera memblokir beberapa iklanOpera memblokir semua iklan!$1 berbagi tab Opera.$1 berbagi tab Opera dengan $2.$1 berbagi tab Opera dan audio.$1 berbagi tab Opera dan audio dengan $2.Restart Opera untuk mengaktifkan $1$1 (Pribadi)Jendela &pribadi baruPengecualian berikut hanya berlaku pada sesi privat ini.Mode pribadi ($1) nantinya akan lebih nyaman digunakan.Ssst! Mode pribadi akan datang lain waktu.Ekstensi (pribadi): $1Tab pribadi: $1Subframe pribadi: $1Buka link di jendela &privateBuka di jendela pribadi baruBuka yang terpilih di jendela pribadiBuka semua di jendela pribadiSelancar pribadiSaat Anda menutup semua jendela pribadi, semua informasi yang pernah ada akan dihapus.Ijinkan di mode pribadiUnduhan pribadiBuka semua di jendela &pribadi baru
