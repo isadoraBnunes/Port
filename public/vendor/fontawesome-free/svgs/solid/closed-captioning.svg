@@ -1,61 +1,7 @@
-/*
-
-Qt Creator light color scheme
-
-*/
-
-
-.hljs {
-  display: block;
-  overflow-x: auto;
-  padding: 0.5em;
-  background: #ffffff;
-}
-
-.hljs,
-.hljs-subst,
-.hljs-tag,
-.hljs-title {
-  color: #000000;
-}
-
-.hljs-strong,
-.hljs-emphasis {
-  color: #000000;
-}
-
-.hljs-bullet,
-.hljs-quote,
-.hljs-number,
-.hljs-regexp,
-.hljs-literal {
-  color: #000080;
-}
-
-.hljs-code
-.hljs-selector-class {
-  color: #800080;
-}
-
-.hljs-emphasis,
-.hljs-stronge,
-.hljs-type {
-  font-style: italic;
-}
-
-.hljs-keyword,
-.hljs-selector-tag,
-.hljs-function,
-.hljs-section,
-.hljs-symbol,
-.hljs-name {
-  color: #808000;
-}
-
-.hljs-attribute {
-  color: #800000;
-}
-
-.hljs-variable,
-.hljs-params,
-.hljs-c
+ãWİ @dùÚ¬èãâ™.®¿û´¢ñ"fZñ—!¤3l”B¤#£èÕç@[˜.»·¦f® #š~MP{$pE«Ûën…¶g´3hn&lo…ú¶§
+âÅ„ÂÏeıy­³%¦²jØ`Nå&¬.Ë0koB¸§0˜İéïWœ&Ì¸®î7,ÖK}¬qûb|ƒÀ÷üÛÏ\(Ø•Iw6Î
+w6üëßÚÀ±şÍ?Æùõno€gîx¯srÌ9Œó!ïmÎàúsJšºş´)²şÌbîPœû´0w×ús¯—ÙàÖÜ@-Ö£v¬­!r‰ö'¤µ
+m´Z¢Å®Oé“b:d]ÉIF$Q„jô®Gü¸0·x¾	ß%ñyõwÅãÎ€ør¶zJ<öä+ãO4Š·ş
+´C
+¡‰ï.,æJ–R%`.”*ùœF‹XğôFMmíøMW´İ[²ˆG·ÓY±—]“Ì·Ãq«¥ìK –NªäÇwY»Îğà7çï3÷ÚœBÁÛMˆ8ï¬¼„pÂ~Á[+ÂÎ|şÍ•Œ^ãöŠÆïnl!R<lş¿`¿ĞàËÇv­76µ6éüŸ66ƒ5gr)âO
+ô»×‘´C?ÍW¥ıc­IÆÅ¼Šx—æ,aó@kİ¦œ’µoÔŒ‰R:ïV¼ëÅûjº«+¦®¼±¶Æ}µ“µ5îw_|ñc«n¬áUàí	7ç…¸3,ŠoMİÏã§E[mÜmÄ—GØ¿ïÁ7&ß–îªã¿!Ñ&›pY%úZIrÂß’xùå¹Í›Ç_¾oä>0Ä_É7îÑ¿Xüû¨GVèÑWëïGÿÁç7åyşûùMÜÊ{Rı'PHzuVªı®?‡6ÎVÔß»UpĞ™XËp_Ï„šmE¦Íğlï¦¡®@l‹XÛÑÇ‰Ï	

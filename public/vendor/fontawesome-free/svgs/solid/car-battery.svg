@@ -1,51 +1,27 @@
-/*
+ype.hasOwnProperty;
+var propIsEnumerable = Object.prototype.propertyIsEnumerable;
 
-Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-license.org/
+function toObject(val) {
+	if (val === null || val === undefined) {
+		throw new TypeError('Object.assign cannot be called with null or undefined');
+	}
 
-*/
-
-.hljs {
-  display: block;
-  overflow-x: auto;
-  padding: 0.5em;
-  background: #23241f;
+	return Object(val);
 }
 
-.hljs,
-.hljs-tag,
-.hljs-subst {
-  color: #f8f8f2;
-}
+function shouldUseNative() {
+	try {
+		if (!Object.assign) {
+			return false;
+		}
 
-.hljs-strong,
-.hljs-emphasis {
-  color: #a8a8a2;
-}
+		// Detect buggy property enumeration order in older V8 versions.
 
-.hljs-bullet,
-.hljs-quote,
-.hljs-number,
-.hljs-regexp,
-.hljs-literal,
-.hljs-link {
-  color: #ae81ff;
-}
+		// https://bugs.chromium.org/p/v8/issues/detail?id=4118
+		var test1 = new String('abc');  // eslint-disable-line no-new-wrappers
+		test1[5] = 'de';
+		if (Object.getOwnPropertyNames(test1)[0] === '5') {
+			return false;
+		}
 
-.hljs-code,
-.hljs-title,
-.hljs-section,
-.hljs-selector-class {
-  color: #a6e22e;
-}
-
-.hljs-strong {
-  font-weight: bold;
-}
-
-.hljs-emphasis {
-  font-style: italic;
-}
-
-.hljs-keyword,
-.hljs-selector-tag,
-.hl
+		// https://bugs
